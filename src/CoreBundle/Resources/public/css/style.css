@@ -1,0 +1,697 @@
+@import url(https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope);
+
+.angular-hidden {
+    display: none;
+}
+
+a, .btn-link {
+    color: #181B3D;
+}
+
+.btn-link:hover,
+.btn-link:active,
+.btn-link:focus,
+a:hover, a:active, a:focus {
+    color: #0099FF;
+}
+
+.skin-black-light .main-header .navbar-brand,
+.skin-black-light .main-header > .navbar .navbar-nav > li > a,
+.navbar .navbar-custom-menu .navbar-nav > li > a, .skin-black-light .main-header > .navbar .navbar-right > li > a {
+    border-color: transparent !important;
+}
+
+.main-header .navbar .nav > li > a > .label {
+    font-size: 15px;
+    right: 3px;
+    border-radius: 10px;
+}
+
+.navbar-brand {
+    font-family: 'Annie Use Your Telescope', cursive;
+    display: inline-block !important;
+    vertical-align: middle !important;
+    height: 50px;
+    line-height: 50px;
+    padding: 0px;
+}
+
+.navbar-brand > img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.skin-black-light .main-header > .navbar > .sidebar-toggle {
+    border-right-color: transparent;
+}
+
+.box,
+.box-footer {
+    border-color: transparent;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu > a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover > a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 200px;
+    direction: ltr;
+    cursor: pointer;
+}
+
+.fileinput-button {
+    position: relative;
+    overflow: hidden;
+}
+
+#loading-bar-spinner .spinner-icon {
+    top: 50%;
+    left: 50%;
+    position: relative;
+}
+
+#loading-bar-spinner {
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+.loading-flowc {
+    background: gray;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    -ms-filter: 'alpha(opacity=50)';
+}
+
+.countCharactes {
+    float: right;
+    color: #555555;
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.redColor {
+    color: #181B3D;
+}
+
+.btn.btn-circle {
+    width: 30px;
+    height: 30px;
+    line-height: 27px;
+    font-size: 1.7em;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.steps-indicator.steps-indicator-top {
+    position: relative;
+}
+
+.creditPackName {
+    font-size: 35px;
+}
+
+.creditPackContent {
+    font-size: 15px;
+    margin: 10px;
+}
+
+.creditNumber {
+    font-size: 30px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+#version {
+    bottom: 20px;
+    position: absolute;
+    color: #555555;
+}
+
+#version span {
+    display: block;
+}
+
+#version img {
+    width: 40%;
+}
+
+.logo-lg {
+    font-family: 'Annie Use Your Telescope', cursive;
+    font-size: 42px;
+}
+
+.logo-lg img {
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+
+.bg-postit {
+    background-color: #E9F094;
+    cursor: pointer;
+    color: #333;
+}
+
+tr.card {
+    cursor: pointer;
+}
+
+.card.selected,
+.card.selected .bg-postit {
+    background-color: #79c9ec !important;
+}
+
+.bg-postit .box-header a,
+.bg-postit .box-header i,
+.bg-postit .box-title h5,
+.bg-postit .box-title input {
+    color: #333;
+}
+
+.bg-postit.bg-green .box-header a,
+.bg-postit.bg-green .box-header i {
+    color: white;
+}
+
+.card {
+    min-height: 80px;
+}
+
+.card input.editable {
+    display: none;
+}
+
+.card .box-title.editing h5 {
+    display: none;
+}
+
+.card .box-title.editing input.editable {
+    display: block;
+}
+
+.textarea-wysihtml5 {
+    min-height: 400px;
+}
+
+.tasklist {
+    min-height: 200px;
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.search-fl, .navbar-form .form-control.searchinput-fl {
+    width: 250px;
+    float: left;
+}
+
+.search-fl.ng-hide-add .searchinput-fl, .search-fl.ng-hide-remove .searchinput-fl {
+    float: left;
+    transition: all linear 0.5s;
+}
+
+.search-fl.ng-hide-add, .search-fl.ng-hide-remove {
+    float: left;
+    transition: all linear 0.1s;
+}
+
+.search-fl.ng-hide, .search-fl.ng-hide .searchinput-fl {
+    float: left;
+    width: 0px;
+}
+
+#apps-launcher {
+    display: none;
+}
+
+#apps-launcher .app-launcher-title {
+    color: whitesmoke;
+    text-shadow: 1px 1px 2px black;
+}
+
+.big-ontop-window {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(50, 50, 50, 0.85);
+    padding: 30px;
+    left: 0px;
+    z-index: 9;
+}
+
+.big-ontop-window.white .container {
+    max-width: 10000px;
+}
+
+.big-ontop-window.white {
+    background-color: rgba(255, 255, 255, 0.94);
+}
+
+.big-ontop-window .container {
+    max-width: 800px;
+}
+
+#toggle-launcher {
+    font-size: 1.2em;
+    font-size: 1.2em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#toggle-launcher i {
+    font-size: 2.2em;
+}
+
+.app-launcher {
+    font-size: 1.1em;
+    text-align: center;
+    height: 130px;
+    padding: 25px;
+    margin-bottom: 20px;
+    width: 130px;
+    border-radius: 10px;
+}
+
+.app-launcher-container.active .app-launcher {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.h1-editable {
+    font-size: 36px;
+    height: 52px;
+}
+
+.select2-container--default .select2-selection--multiple {
+    background-color: white;
+    border: 1px solid #d2d6de;
+    cursor: text;
+    border-radius: 0px;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+    border-color: #3c8dbc !important;
+}
+
+.main-header > .navbar .nav > li.show-apps:hover > a,
+.main-header > .navbar .nav > li.show-apps > a:focus {
+    color: #0099FF;
+}
+
+.filters-content {
+    padding-top: 20px;
+    background: url(../images/patterns/crossword.png);
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    border-color: #A55E58;
+    background-color: #DA857D;
+}
+
+.pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
+    color: #0099FF;
+}
+
+.btn-primary {
+    border-color: #0099FF;
+    background-color: #181B3D;
+    border-radius: 3px;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary.hover {
+    background-color: #0099FF;
+    border-color: #0099FF;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    border-color: #0099FF;
+    background-color: #0099FF;
+}
+
+.select2-container--default .select2-selection--single {
+    border-color: #d2d6de;
+    border-radius: 0px;
+    height: 34px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #000 transparent transparent transparent;
+    border-width: 6px 3px 0 3px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    right: 0px;
+    width: 18px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-left: 17px;
+}
+
+.select2-container {
+    width: 100%;
+}
+
+.nav-app .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+    border: none;
+    cursor: pointer;
+    border-radius: initial;
+}
+
+.nav-app .nav-tabs > li {
+    font-size: 14px;
+    margin-bottom: -2px;
+}
+
+.nav-app .nav-tabs {
+    border-bottom: initial;
+}
+
+.nav-app .box {
+    border-radius: inherit;
+}
+
+.nav-app .nav > li > a:hover, .nav > li > a:active, .nav > li > a:focus {
+    border-color: white;
+    color: #444;
+    background: #FFFFFF;
+}
+
+.nav-app .nav-tabs > li > a {
+    border-radius: initial;
+}
+
+.nav-app .app-icon i {
+    font-size: 22px;
+    color: white;
+    margin: 10px 15px;
+}
+
+.box {
+    border-radius: 0px;
+}
+
+.sales th {
+    font-weight: lighter;
+}
+
+.select2.addButton, .dropdown.addButton {
+    float: left;
+    width: 80%;
+}
+
+select.select2 {
+    width: 100%;
+    background: #F4F4F4;
+    border: 1px solid #DDDDDD;
+    height: 34px;
+}
+
+.box-small-nav {
+    margin-left: 60px;
+}
+
+@media (max-width: 767px) {
+    .navbar-custom-menu {
+        font-size: 30px;
+    }
+
+    .navbar-nav > .user-menu > .dropdown-menu {
+        width: 80%;
+    }
+
+    .app-lucher {
+        font-size: 17px;
+    }
+
+    body {
+        font-size: 20px;
+    }
+
+    .navbar .container {
+        padding: 0px;
+    }
+
+    .navbar-brand > img {
+        height: 60px;
+        width: auto;
+    }
+}
+
+.navbar-header {
+    width: 100%;
+}
+
+.nav-app .app-icon {
+    height: 40px;
+}
+
+.nav-app .app-icon img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.line-legend {
+    margin-left: 10px;
+}
+
+.line-legend li span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+}
+
+.main-footer {
+    background-color: #F5F5F5;
+    border: none;
+}
+
+.flowr-footer {
+    width: 100%;
+    text-align: center;
+}
+
+.flowr-footer-container {
+    margin: auto;
+    border-top: 1px #bbb solid;
+    width: 200px;
+}
+
+.flowr-footer-container.hover,
+.flowr-footer-container:hover {
+    border-color: #0099FF;
+}
+
+.flowr-version {
+    font-size: 14px;
+    color: #555;
+}
+
+.flowr-footer img {
+    margin-top: 12px;
+    margin-bottom: -4px;
+}
+
+.flowr-footer .logo-lg {
+    font-size: 24px;
+}
+
+.import-step {
+    min-height: 450px;
+}
+
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 15px;
+}
+
+.fc-event {
+    background-color: grey;
+    border-color: grey;
+    color: whitesmoke !important;
+}
+
+.fc-event.company, .label.label-event-company {
+    background-color: #646464 !important;
+    border-color: #646464 !important;
+}
+
+.fc-event.default {
+    background-color: #646464 !important;
+    border-color: #646464 !important;
+}
+
+.fc-event.project, .label.label-project {
+    background-color: #DC6E28 !important;
+    border-color: #DC6E28 !important;
+}
+
+.fc-event.account, .label.label-account {
+    background-color: #78BF43 !important;
+    border-color: #78BF43 !important;
+}
+
+.fc-event.opportunity, .label.label-opportunity {
+    background-color: #F00078 !important;
+    border-color: #F00078 !important;
+}
+
+/* temp */
+.app-header {
+    margin-top: 15px;
+    padding-bottom: 12px;
+    margin-left: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.app-header img {
+    max-width: 30px;
+}
+
+.app-header span {
+    font-size: 20px;
+    font-weight: 100 !important;
+}
+
+.main-header .logo {
+    height: 60px;
+}
+
+.main-sidebar, .left-side {
+    top: 10px !important;
+    background-color: #F5F5F5 !important;
+    z-index: 0;
+}
+
+.content-wrapper {
+    border-left-color: #F5F5F5 !important;
+}
+
+.main-header {
+    box-shadow: 0px 0px 8px gray !important;
+}
+
+.nav-tabs-custom > .nav-tabs > li.active {
+    border-top-color: #181B3D;
+}
+
+.sidebar-menu > li > a {
+    font-weight: 100 !important;
+}
+
+.sidebar-menu > li.active > a {
+    background-color: rgba(221, 221, 221, 0.5) !important;
+}
+
+.form-control:focus {
+    border-color: rgba(69, 0, 212, 0.75) !important;
+    box-shadow: none;
+}
+
+.project-members img {
+    max-height: 25px;
+}
+
+.drive-folder {
+    padding: 5px;
+    background-color: whitesmoke;
+    height: 50px;
+    border: 1px solid #ddd;
+    box-shadow: 1px 1px 2px grey;
+}
+
+.drive-folder .icon {
+    float: left;
+    width: 10%;
+}
+.drive-folder .title {
+    float: left;
+    width: 80%;
+}
+
+.drive-file {
+    padding: 5px;
+    height: 50px;
+    border: 1px solid #ddd;
+}
+
+.drive-file .icon {
+    float: left;
+    width: 10%;
+}
+
+.drive-file .title {
+    float: left;
+    width: 80%;
+}

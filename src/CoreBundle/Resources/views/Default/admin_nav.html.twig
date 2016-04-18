@@ -1,0 +1,79 @@
+<section class="sidebar">
+    <div class="app-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <img src="{{ asset('bundles/flowercore/images/icons/AdministrativeTools-100.png') }}"
+                     class="img-responsive pull-left" width="40">
+                <span>{{ 'settings'|trans|title }}</span>
+            </div>
+        </div>
+    </div>
+    <ul class="sidebar-menu">
+        <li>
+            <a href="{{ path('user') }}">
+                <i class="fa fa-user"></i>
+                {{ 'users' | trans({},'Admin') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('usergroup') }}" >
+                <i class="fa fa-users"></i>
+                {{ 'user group' | trans({},'Admin') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('taskstatus') }}" >
+                <i class="fa fa-tags"></i>
+                {{ 'taskstatus' | trans({},'Admin') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('eventstatus') }}" >
+                <i class="fa fa-calendar"></i>
+                {{ 'eventstatus' | trans({},'Admin') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('calleventstatus') }}" >
+                <i class="fa fa-phone"></i>
+                {{ 'calleventstatus' | trans({},'Admin') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('admin_salesstatus') }}" >
+                <i class="fa fa-line-chart"></i>
+                {{ 'SaleStatus' | trans({},'SaleStatus') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('admin_salecategory') }}" >
+                <i class="fa fa-line-chart"></i>
+                {{ 'SaleCategory' | trans({},'SaleCategory') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('paymentmethod') }}" >
+                <i class="fa fa-credit-card"></i>
+                {{ 'PaymentMethod' | trans({},'PaymentMethod') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('admin_clients_activity') }}" >
+                <i class="fa fa-flag"></i>
+                {{ 'Activity' | trans({},'Activity') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('admin_orgposition') }}" >
+                <i class="fa fa-sitemap"></i>
+                {{ 'orgpositions' | trans({},'Admin') | title }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('securityGroup') }}" >
+                <i class="fa fa-user-secret"></i>
+                {{ 'SecurityGroups' | trans({},'Admin') | title }}
+            </a>
+        </li>
+    </ul>
+</section>

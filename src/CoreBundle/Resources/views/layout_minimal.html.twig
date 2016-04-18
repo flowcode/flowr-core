@@ -1,0 +1,246 @@
+{% extends "FlowerCoreBundle::base.html.twig" %}
+{% block wrapper %}
+    <div class="wrapper">
+        <div multi-app="flowerSearch">
+            <header class="main-header">
+                <nav class="navbar navbar-static-top">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <a href="{{ path('dashboard') }}" class="navbar-brand">
+                                {{ render(controller('FlowerUserBundle:Organization:logo', {'size':'xs'})) }}
+                            </a>
+                            <div ng-controller="SearchController">
+                                <div class=" pull-left" id="navbar-collapse">
+
+                                    <div class="form-group navbar-form navbar-left">
+                                        <div class="hidden" id="closeSearch" ng-click="closeSearch()"></div>
+                                        <div ng-show="showSearchInput" class="inline-block search-fl">
+                                            <eased-input value="search.text" input-class="searchinput-fl form-control "
+                                                         input-id="navbar-search-input" attributes="" timeout="500"
+                                                         placeholder="{{ 'Tipe your text to search'| trans }}"/>
+                                        </div>
+                                        <div title="Alt+Shif+F" ng-class="search" id="bigSearchIcon"
+                                             class="inline-block"
+                                             style="font-size: 22px;margin-left: 5px;cursor: pointer;"
+                                             ng-click="toogleSearchInput()">
+                                            <i class="fa fa-search"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <ul class="nav navbar-nav" style="height: 60px;float: right;">
+                                <li class="active show-apps" style="position: absolute;left: 45%;">
+                                    <a href="#" id="toggle-launcher" title="Alt+A">
+                                        <i class="icon ion-grid"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- Navbar Right Menu -->
+                            <div class="navbar-custom-menu">
+                                <ul class="nav navbar-nav">
+
+                                    <li class="dropdown notifications-menu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="ionicons ion-ios-plus-outline"></i>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="header">{{ 'quick add'|trans|title }}</li>
+                                            <li>
+                                                <ul class="menu">
+                                                    <li><a onclick="quickEvent()">{{ 'event'|trans|title }}</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="footer"></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown notifications-menu" ng-controller="NotificationController"
+                                        notifications-widget alerts="alerts" notifications="notifications">
+                                    </li>
+
+
+                                    <!-- User Account Menu -->
+                                    <li class="dropdown user user-menu">
+                                        <!-- Menu Toggle Button -->
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="fa fa-user"></i>
+                                            <span class="hidden-xs">{{ app.user.getHappyName }}</span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <!-- The user image in the menu -->
+                                            <li class="user-header">
+                                                {{ render(controller('FlowerUserBundle:Profile:avatar')) }}
+                                                <p>
+                                                    {{ app.user.getHappyName }}
+                                                    <small>{{ 'Member since' | trans }} Nov. 2012</small>
+                                                </p>
+                                            </li>
+                                            <!-- Menu Body -->
+                                            <li class="user-body" style="display: none;">
+                                                <div class="col-xs-4 text-center">
+                                                    <a href="#">Followers</a>
+                                                </div>
+                                                <div class="col-xs-4 text-center">
+                                                    <a href="#">Sales</a>
+                                                </div>
+                                                <div class="col-xs-4 text-center">
+                                                    <a href="#">Friends</a>
+                                                </div>
+                                            </li>
+                                            <!-- Menu Footer-->
+                                            <li class="user-footer">
+                                                <div class="pull-left">
+                                                    <a href="{{ path('user_profile_public', { 'username':app.user.username }) }}"
+                                                       class="btn btn-default btn-flat">{{ 'Profile' | trans }}</a>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <a href="{{ path('fos_user_security_logout') }}"
+                                                       class="btn btn-default btn-flat">{{ 'Sign out' | trans }}</a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div><!-- /.navbar-custom-menu -->
+                        </div>
+                    </div><!-- /.container-fluid -->
+                </nav>
+            </header>
+            <div id="search-app">
+                <div ng-view>
+                </div>
+            </div>
+            {{ render(controller('FlowerCoreBundle:Default:apps')) }}
+        </div>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div class="container">
+                <a href="#" id="page-tour-start">
+                    <i class="ionicons ion-ios-help-outline"></i>
+                </a>
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+
+        <footer class="main-footer" id="footer">
+            <div class="flowr-footer">
+                <a href="#" data-toggle="modal" data-target="#modal_flowr_info">
+                    <img src="{{ asset('bundles/flowercore/images/logo_square_alpha_greyscale.png') }}" width="20">
+                </a>
+            </div>
+        </footer>
+
+    </div><!-- ./wrapper -->
+    <div class="modal fade" id="modal_account_event" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">{{ 'quick event'|title }}</h4>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        /* realtime updates */
+        var userId = '{{ app.user.id }}';
+        var pusher = new Pusher('{{ pusher_key }}', {
+            encrypted: true
+        });
+        var quick_event_url = "{{ path('event_new_quick') }}";
+        var quick_event_url_save = "{{ path('event_create_quick') }}";
+
+        function quickEvent() {
+            $.ajax({
+                url: quick_event_url,
+                success: function (data) {
+                    $("#modal_account_event .modal-body").html(data);
+                    $('#modal_account_event form').submit(function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            url: quick_event_url_save,
+                            method: "post",
+                            data: $("#modal_account_event form").serialize(),
+                            success: function (data) {
+                                $("#modal_account_event .modal-body").html(data);
+                                $("#modal_account_event").modal("hide");
+                            }
+                        });
+                    });
+                    $("#modal_account_event select").select2();
+                    $("#modal_account_event").modal("show");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            'use strict';
+            /* delete confirm */
+            $('a.delete').click(function (e) {
+                var url = $(this).attr("action");
+                e.preventDefault();
+                $('#delete_confirm').modal('show');
+                $('#delete_confirm').find('button.btn-danger').click(function () {
+                    $('#delete_confirm').modal('hide');
+                    document.location = url;
+                });
+            })
+            $('form#delete').submit(function (e) {
+                var $form = $(this), $hidden = $form.find('input[name="modal"]');
+                if ($hidden.val() === '0') {
+                    e.preventDefault();
+                    $('#delete_confirm').modal('show');
+                    $('#delete_confirm').find('button.btn-danger').click(function () {
+                        $('#delete_confirm').modal('hide');
+                        $hidden.val('1');
+                        $form.submit();
+                    });
+                }
+            });
+
+
+            $(".textarea-wysihtml5").wysihtml5();
+
+            $("#toggle-launcher").click(function () {
+                $("#apps-launcher").fadeToggle('fast');
+            });
+            $(".app-launcher").click(function (event) {
+                event.stopPropagation();
+            });
+            $("#apps-launcher").click(function () {
+                $("#apps-launcher").fadeOut('fast');
+            });
+
+            $("#page-tour-start").click(function () {
+                $('#tour').crumble();
+            });
+
+            $("select.filter").select2();
+
+
+            $(document).keydown(function (e) {
+                if (e.keyCode == 27) {
+                    $("#apps-launcher").fadeOut('fast');
+                    $("#closeSearch").click();
+                }
+                if (e.keyCode == 65 && e.altKey) {
+                    $("#apps-launcher").fadeToggle('fast');
+                }
+                if (e.keyCode == 70 && e.altKey && e.shiftKey) {
+                    $("#bigSearchIcon").click();
+                }
+            });
+        });
+    </script>
+{% endblock %}

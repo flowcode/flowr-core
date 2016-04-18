@@ -1,0 +1,159 @@
+'Admin Settings': 'Administrado de configuración'
+Dashboard: Dashboard
+'Member since': 'Miembro desde'
+Mettings: Reuniones
+'NO EVENTS': 'NO TENES EVENTOS'
+Profile: Perfil
+Projects: Proyectos
+Settings: Configuraciones
+'Sign out': 'Cerrar sessión'
+Tasks: Tareas
+'Tipe your text to search': 'Ingrese texto para buscar.'
+Today: Hoy
+Tomorrow: Mañana
+'View all': 'Ver todo'
+'You have %amount% notifications': 'Tenes %amount% notificaciones'
+accounts: organizaciones
+clients: clientes
+sales: ventas
+products: productos
+boards: tableros
+calls: llamadas
+contacts: contactos
+files: Archivos
+dashboard: dashboard
+estimations: estimaciones
+finances: finanzas
+fullDateTime: 'd/m/y H:i'
+fullTime: 'H:i'
+smallDate: 'd/m/y'
+'mail campaigns': 'campañas de emails'
+opportunities: oportunidades
+planner: eventos
+projects: proyectos
+settings: configuración
+'today events': 'eventos de hoy'
+clean: limpiar
+apply: aplicar
+filter: filtro
+close: cerrar
+calls history: historial de llamados
+activity: actividad
+organization: organización
+my projects: mis proyectos
+
+#dias
+Monday: Lunes
+Tuesday: Martes
+Wednesday: Miércoles
+Thursday: Jueves
+Friday: Viernes
+Saturday: Sábado
+Sunday: Domingo
+
+Mon: Lun
+Tue: Mar
+Wed: Mié
+Thu: Jue
+Fri: Vie
+Sat: Sáb
+Sun: Dom
+
+
+January: Enero
+February: Febrero
+March: Marzo
+April: Abril
+May: Mayo
+June: Junio
+July: Julio
+August: Agosto
+September: Septiembre
+October: Octubre
+November: Noviembre
+December: Diciembre
+
+Jan: Ene
+Feb: Feb
+Mar: Mar
+Apr: Abr
+May: May
+Jun: Jun
+Jul: Jul
+Aug: Ago
+Sep: Sep
+Oct: Oct
+Nov: Nov
+Dec: Dic
+
+confirm: Confirmar
+
+resetting_password_ignere: If this message isn't valid ignore this message.
+resetting_password_firsturl: Hemos recivido el pedido para restablecer tu contraseña para realizar este cambio por favor visita este <a href='%confirmationUrl%'>link</a>
+resetting_password_secondurl: En caso de no poder ingresar copia esta url en tu browser: %url%
+
+#Paginado
+Previous: Anterior
+previous: Anterior
+Next: Siguiente
+next: Siguiente
+
+save: guardar
+Copy of: Copia de
+
+
+unsuscribe_desc: Mediante esta acción se elimanaran las suscripciones de todas las listas.
+unsuscribed_succesfully: Se elimanaron las suscripciones de todas las listas seleccioneadas.
+be careful: tenga cuidado
+settings-warning: Cada acción tiene efecto inmediato en el comportamiento del sistema.
+ask-for-support: Si tiene dudas, por favor consulte con el servicio de soporte.
+
+
+this_element_is_archived: "Este elemento esta archivado"
+
+
+events: eventos
+members: miembros
+iterations: iteraciones
+docs: doc.
+stats: estado
+next events: próx. eventos
+time tracking stats: Identificador de seguimiento
+View All: ver completo
+Hours: Horas
+Project status: Estado de proyecto
+estimated: estimado
+spent: gastado
+% Done: % Completado
+start: comienza
+end: finaliza
+show: ver
+delete: borrar
+
+
+about: Nosotros
+Flowr is builded by: Flowr realizado por
+More info at: Más información en
+
+quick add: agregado rápido
+event: evento
+task: tarea
+
+
+Notifications: Notificaciones
+type: Tipo
+message: Mensaje
+date: Fecha
+Enabled: Habilitado
+Create: Crear
+opens by campaign: Abiertos por campaña
+campaigns: campañas
+launched on: lanzado en 
+Search: Buscar
+search: buscar
+to: para
+opens: abiertos
+clicks: clicks
+state: estado
+campaign dashboard: tablero de campaña
+Calendar: Calendario

@@ -1,0 +1,59 @@
+
+
+<div class=" big-ontop-window white" ng-show="search.searching" >
+    <div class="container"> 
+	    <div class="col-sm-4">
+	    	<h2>{{'Tareas'}}</h2>
+			<div ng-repeat="task in tasks"> 
+				<a href="/task/{{task.id}}/show">
+					#{{task.id}} 
+					{{task.name}}
+				</a>
+			</div>
+	    </div>
+	    <div class="col-sm-4">
+	    	<h2>{{'Projects'}}</h2>
+			<div ng-repeat="project in projects"> 
+				<a href="/project/{{project.id}}/show">
+					{{project.name}}
+				</a>
+			</div>
+	    </div>
+	    <div class="col-sm-4">
+	    	<h2>{{'Cuentas'}}</h2>
+			<div ng-repeat="account in accounts"> 
+				<a href="/account/{{account.id}}/show">
+					#{{account.id}} 
+					{{account.name}}
+					 <small><i>{{account.cuit}}</i></small>
+				</a>
+			</div>
+	    </div>
+	    <div class="col-sm-4">
+	    	<h2>{{'Contactos'}}</h2>
+			<div ng-repeat="contact in contacts"> 
+				<a href="/contact/{{contact.id}}/show">
+					{{contact.lastname}} {{contact.firstname}}
+					<small><i>{{contact.email}}</i></small>
+				</a>
+			</div>
+	    </div>
+	    <div class="col-sm-4">
+	    	<h2>{{'Eventos'}}</h2>
+			<div ng-repeat="event in events"> 
+				<a href="/event/{{event.id}}/edit">
+					{{event.title}}
+					<small><i>{{event.start_date| date:' d/M/yy HH:mm'}}</i></small>
+				</a>
+			</div>
+	    </div>
+	    <div class="col-sm-4">
+	    	<h2>{{'Notas'}}</h2>
+			<div ng-repeat="note in notes"> 
+				<a href="/account/{{note.account.id}}/show">
+					{{note.title}}
+				</a>
+			</div>
+	    </div>
+    </div>
+</div>

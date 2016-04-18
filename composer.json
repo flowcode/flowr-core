@@ -1,0 +1,25 @@
+{
+  "name": "flower/corebundle",
+  "description": "Flower Core.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Juan Manuel Aguero",
+      "email": "jaguero@flowcode.com.ar"
+    },
+    {
+      "name": "Francisco Memoli Olmos",
+      "email": "fmemoli@flowcode.com.ar"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Flower\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}

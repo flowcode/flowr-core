@@ -1,0 +1,58 @@
+services:
+#    flower_core.example:
+#        class: Flower\CoreBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    app.form.registration:
+        class: Flower\CoreBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: "form.type", alias: "app_user_registration" }
+
+    app.form.invitation:
+        class: Flower\CoreBundle\Form\Type\InvitationFormType
+        arguments: ['@app.form.data_transformer.invitation']
+        tags:
+            - { name: "form.type", alias: "app_invitation_type" }
+
+    app.form.data_transformer.invitation:
+        class: Flower\CoreBundle\Form\DataTransformer\InvitationToCodeTransformer
+        arguments: ['@doctrine.orm.entity_manager']
+        public: false
+        
+   
+    form.type.board:
+        class: Flower\BoardBundle\Form\Type\BoardType
+        arguments: ["@security.context"]
+        tags:
+            - { name: form.type, alias: board_type }    
+
+    form.type.task:
+        class: Flower\BoardBundle\Form\Type\TaskType
+        arguments: ["@security.context"]
+        tags:
+            - { name: form.type, alias: task_type }
+
+
+    flower.core.service.notification:
+        class: Flower\CoreBundle\Service\NotificationService
+        calls:
+          - [ setContainer,[ @service_container ]]
+    flower.search:
+        class: Flower\CoreBundle\Service\SearchService
+        arguments: ['@security.context']
+        calls:
+          - [ setContainer,[ @service_container ] ]
+    flower.core.service.kanban.order: 
+        class: Flower\CoreBundle\Service\KanbanOrderService
+        calls:
+          - [ setContainer,[ @service_container ]]
+
+    flower.core.service.task:
+        class: Flower\CoreBundle\Service\TaskService
+        calls:
+          - [ setContainer,[ @service_container ]]
+
+    flower.core.service.google_client:
+            class: Flower\CoreBundle\Service\GoogleClientService
+            calls:
+              - [ setContainer,[ @service_container ]]

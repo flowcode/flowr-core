@@ -1,0 +1,163 @@
+
+<div id="apps-launcher" class="big-ontop-window">
+    <div>
+        <div class="container">
+            <div class="row">
+                {% if is_granted('ROLE_CLIENT') %}             
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container active">
+                    <a href="{{ path('account') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/Contacts-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'clients'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                {% if is_granted('ROLE_BOARD') %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('board') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/Todo-List-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'tasks'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+
+              {% if is_granted('ROLE_PROJECT') %}   
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('project_dashboard') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/Engineering-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'projects'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                
+
+              {% if is_granted('ROLE_MARKETING_EMAIL') %} 
+
+                <div class="col-md-3 col-sm-4 col-xs-6  app-launcher-container">
+                    <a href="{{ path('campaignmail') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/GroupMessage-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'mail campaigns'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div> 
+                {% endif %}
+                
+
+              {% if is_granted('ROLE_FINANCE') %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="#">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/Bank-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'finances'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                
+                {% if is_granted('ROLE_PLANNER') %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('event') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/Calendar-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'planner'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                {% if is_granted('ROLE_CALL') %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('callevent') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/CustomerSupport-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'calls'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+				{% if is_granted('ROLE_PRODUCT') %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('product') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/Packaging-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'products'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                {% if is_granted('ROLE_SALES') %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('sale') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/PurchaseOrder-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'sales'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN_SETTINGS') %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('admin_dash') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/AdministrativeTools-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'settings'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endif %}
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('employee') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/Organization-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'organization'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
+                    <a href="{{ path('flower_drive_homepage') }}">
+                        <div class="app-launcher">
+                            <img src="{{ asset('bundles/flowercore/images/icons/FilingCabinet-100.png') }}" class="img-responsive">
+                            <div class="app-launcher-title">
+                                {{ 'files'|trans|title }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        {#
+bg-orange
+bg-fuchsia
+bg-purple
+bg-black #}
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,75 @@
+{% extends "FlowerCoreBundle::layout.html.twig" %}
+
+{% block title %}Tracker - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <h1>{{ 'Tracker' | trans({}, 'Tracker')}}</h1>
+        <ol class="breadcrumb">
+            <li><a href={{ path('dashboard') }}><i class="fa fa-dashboard"></i> {{"Dashboard" | trans({}, 'Tracker')}}</a></li>
+            <li><a href="{{ path('tracker') }}"> {{ '%entity% list'|trans({'%entity%': 'Tracker'}, 'Tracker') }}</a></li>
+            <li class="active" >{{ '%entity%'|trans({'%entity%': 'Tracker'}, 'Tracker') }}</li>
+        </ol>
+    </section>
+    <section class="content">    
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"></h3>                            </div>
+            <div class="box-body">
+                <table class="table table-hover record_properties">
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{'Id'|trans({}, 'Tracker')}}</th>
+                            <td>{{ tracker.id }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{'Name'|trans({}, 'Tracker')}}</th>
+                            <td>{{ tracker.name }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">{{'Description'|trans({}, 'Tracker')}}</th>
+                            <td>{{ tracker.description }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer">
+            {{ form_start(delete_form) }}
+        {{ form_widget(delete_form) }}
+
+        <div class="btn-group record_actions">
+
+            <a class="btn btn-primary" href="{{ path('tracker_edit', {id: tracker.id}) }}">
+                <i class="fa fa-edit"></i> {{ 'Edit'|trans({}, 'Tracker') }}
+            </a>
+            <button class="btn btn-danger" type="submit"><i class="fa fa-trash-o"></i> {{ 'Delete'|trans({}, 'Tracker') }}</button>
+
+        </div>
+
+        <input name="modal" type="hidden" value="0">
+    {{ form_end(delete_form) }}
+
+    <div id="delete_confirm" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>{{ 'Confirm delete'|trans({}, 'Tracker') }}</h3>
+                </div>
+                <div class="modal-body">
+                    <p>{{ 'You are about to delete an item'|trans({}, 'Tracker') }}, {{ 'this procedure is irreversible'|trans({}, 'Tracker') }}.</p>
+                    <p>{{ 'Do you want to proceed?'|trans({}, 'Tracker') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger">{{ 'Yes'|trans({}, 'Tracker') }}</button>
+                    <button class="btn btn-default" data-dismiss="modal">{{ 'No'|trans({}, 'Tracker') }}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    
+    </section>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+<div class="box-header">
+    <h3 class="box-title">{{ 'Notas'}}</h3>
+    <div class="box-tools">
+	    <a class="btn btn-link"  ng-click="newNoteModal()">
+	        <i class="fa fa-plus"></i>
+	    </a>
+    </div>
+
+</div>
+<div class="box-body" >
+    <div >
+		<ul class="products-list product-list-in-box" ng-init="findAll()">
+			<li class="item cursor-pointer" ng-repeat="item in notes.notes" ng-click="showNote(item)">
+				<a class="product-title">
+						{{item.title}} <small class="text-muted pull-right"><i class="fa fa-calendar"></i> {{item.created| date : 'd/M'}}</small>
+				</a>
+				<span class="product-description">
+				  	{{item.body}}
+				</span>
+			</li>
+		</ul>
+    </div>
+</div>
+<div class="box-footer">
+	<div class="box-tools pull-right">
+		<box-paginator actual-page="notespage" limit="noteslimit" total-elements="notestotal" callback-function="paginateNotes"></box-paginator>
+	</div>
+</div>
+<script type="text/ng-template" id="newNote.html">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            Note
+        </h3>
+    </div>
+    <div class="modal-body"> 
+		<form class="">
+			<div class="form-group">
+				<label for="inputtitle" class="">Title</label>
+					<input type="text" id="inputtitle" class="form-control" required  ng-model="newNote.title" placeholder="title">
+			</div>
+			<div class="form-group">
+				<label for="inputdescription3" class="">Description</label>
+					<textarea id="inputdescription3" class="form-control" required ng-model="newNote.body" rows="10"></textarea>
+			</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="!canSaveModal" ng-click="createNote(newNote)">Save</button>
+        <button class="btn btn-default" ng-disabled="!canSaveModal" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+<script type="text/ng-template" id="viewNote.html">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            Note
+        </h3>
+    </div>
+    <div class="modal-body"> 
+		<form ng-submit="updateNote(viewNote)">
+			<div class="form-group">
+				<h1 ng-hide="titleEditing" ng-click="titleEditing=true"> 
+					{{viewNote.title}}
+				</h1>
+				<input type="text"  ng-show="titleEditing" focus-me="titleEditing" id="inputtitle" ng-blur="titleEditing=false" class="form-control h1-editable" required  ng-model="viewNote.title" placeholder="title" >
+			</div>
+			<div class="form-group">
+				<div  ng-hide="bodyEditing" ng-click="bodyEditing=true"  ng-bind-html="viewNote.body | breakFilter | rawHtml">
+				</div>
+				<textarea id="inputdescription3" class="form-control" ng-blur="bodyEditing=false" focus-me="bodyEditing"  ng-show="bodyEditing" required ng-model="viewNote.body" rows="10"></textarea>
+			</div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-disabled="!canSaveModal" ng-click="updateNote(viewNote)">Save</button>
+        <button class="btn btn-default" ng-disabled="!canSaveModal" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

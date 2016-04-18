@@ -1,0 +1,513 @@
+<div class="form-horizontal sales" ng-init="loadData()">
+	<div ng-show="loaded">
+	    <div class="row">
+		    <div class="row">
+			    <div class="col-xs-12" ng-show="sale.id > 0">
+				    <div class="col-xs-12">
+			    		<h3>Pedido #{{sale.id}}</h3>
+				    </div>
+			    </div>
+		    	<div class="col-sm-6">
+			    	<h4 class="col-sm-12">Datos de empresa</h4>
+					<div class="col-sm-12">
+						<table class="table table-hover record_properties">
+				            <tbody>     
+				                <tr>
+				                    <th scope="row">Cuenta</th>
+				                    <td>
+				                    	<ui-select ng-show="editable" ng-model="sale.account"  class="addButton">
+										    <ui-select-match allow-clear=true placeholder="Seleccione...">
+										        #{{$select.selected.id}} {{ $select.selected.name}}
+										    </ui-select-match>
+										    <ui-select-choices repeat="account in (accounts | nameIdFilter:$select.search ) track by account.id">
+										        #{{account.id}} {{account.name}}
+										    </ui-select-choices>
+										</ui-select>
+										<a class="btn btn-link" ng-show="editable" ng-click="openCreateAccount()" title="Agregar Cuenta">
+											<i class="fa fa-plus"></i>
+										</a>
+										<div ng-hide="editable">
+											{{sale.account.name}}	
+										</div>
+				                    </td>
+				                </tr>
+						   	</tbody>
+						</table>
+					</div>
+
+					<div class="col-sm-12" ng-show="sale.account">
+						<table class="table table-hover record_properties">
+				            <tbody>     
+				            	
+				                <tr>
+				                    <th scope="row">Razón Social</th>
+				                    <td>{{ sale.account.businessName }}</td>
+				                <tr>
+				                </tr>
+				                    <th scope="row">CUIT/CUIL</th>
+				                    <td>{{ sale.account.cuit }}</td>
+				                </tr>
+				                <tr>
+				                    <th scope="row">Actividad</th>
+				                    <td>{{ sale.account.activity.name }}</td>
+				                </tr>
+				            </tbody>
+				        </table>
+					</div>
+				</div>
+		    	<div class="col-sm-6">
+			    	<h4 class="col-sm-12">Información de Pedido</h4>
+					<div class="col-sm-12">
+						<table class="table table-hover record_properties">
+				            <tbody>     
+				                <tr>
+				                    <th scope="row">Estado</th>
+				                    <td>
+				                    	<ui-select ng-show="editable" ng-model="sale.status" >
+										    <ui-select-match allow-clear=true  placeholder="Seleccione...">
+										        {{$select.selected.name}}
+										    </ui-select-match>
+										    <ui-select-choices repeat="status in (saleStatus | filter: $select.search) track by status.id">
+										        {{status.name}}
+										    </ui-select-choices>
+										</ui-select>
+										<div ng-hide="editable">{{sale.status.name}}</div>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <th scope="row">Circuito</th>
+				                    <td>
+				                    	<select ng-model="sale.circuit" class="select2">
+				                    		<option value="{{circuitOne}}">Circuito 1</option>
+				                    		<option value="{{circuitTwo}}">Circuito 2</option>
+				                    	</select>
+				                    </td>
+				                </tr>
+				                <tr>
+				                    <th scope="row">Plan de cuenta</th>
+				                    <td>
+										<select ng-model="sale.category" class="select2">
+											<option ng-repeat="option in saleCategorys" value="{{option.id}}">{{option.name}}</option>
+										</select>
+				                    </td>
+				                </tr>
+						   	</tbody>
+						</table>
+					</div>
+				</div>
+		    	
+		    </div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="" ng-show="sale.account">
+						<h4 class="col-sm-12">Información de Contacto</h4>
+						<div class="col-sm-12">
+							<table class="table table-hover record_properties">
+					            <tbody>     
+					                <tr>
+					                    <th scope="row">Contacto</th>
+					                    <td>
+					                    	<p class="col-sm-8 text-right" ng-hide="contacts.length > 0" style="position: relative;top: 5px;">
+					                    		Agregue contatos a esta cuenta
+					                    	</p>
+					                    	<ui-select ng-model="sale.contact"  class="addButton" ng-show="contacts.length > 0">
+											    <ui-select-match allow-clear=true  placeholder="Seleccione...">
+											        {{$select.selected.lastname}} {{$select.selected.firstname}}
+											    </ui-select-match>
+											    <ui-select-choices repeat="contact in (contacts | filter: $select.search) track by contact.id">
+											       	{{contact.lastname}} {{contact.firstname}}
+											    </ui-select-choices>
+											</ui-select>
+											
+											<a class="btn btn-link" ng-click="openCreateContact()" title="Agregar Contacto">
+				                                <i class="fa fa-plus"></i>
+				                            </a>
+					                    </td>
+					                </tr>
+							   	</tbody>
+							</table>
+						</div>
+						<div class="col-sm-12" ng-show="sale.contact">
+							<table class="table table-hover record_properties">
+					            <tbody>
+					                <tr>
+					                    <th scope="row">Email</th>
+					                    <td>{{ sale.contact.email }}</td>
+					                    <th scope="row">Teléfono</th>
+					                    <td>{{ sale.contact.phone }}</td>
+					                </tr>
+					            </tbody>
+					        </table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" ng-show="sale.account">
+			<h4 class="col-sm-12">Descripción</h4>
+			<div class="col-sm-12">
+				<table class="table table-hover record_properties">
+					<thead>
+						<th>Tipo</th>
+						<th>Producto/Servicio</th>
+						<th>Cantidad</th>
+						<th>Precio unitario sin IVA</th>
+						<th>Precio Total sin IVA</th>
+						<th></th>
+					</thead>
+		            <tbody>
+		                <tr ng-repeat="item in sale.sale_items">
+		                	<td>
+								<select ng-model="item.type" ng-options="saleType.name for saleType in itemTypes track by saleType.id" name="saleType" class="select2"></select>
+			                </td>
+		                    <td>
+		                    	<ui-select ng-model="item.product" ng-show="item.type.id == itemTypeProduct">
+								    <ui-select-match allow-clear=true>
+								        <span ng-bind="$select.selected.name"></span>
+								    </ui-select-match>
+								    <ui-select-choices repeat="product in (products | filter: $select.search) track by product.id">
+								        <span ng-bind="product.name"></span>
+								    </ui-select-choices>
+								</ui-select>
+								<ui-select ng-model="item.service" ng-show="item.type.id == itemTypeService">
+								    <ui-select-match allow-clear=true>
+								        <span ng-bind="$select.selected.name"></span>
+								    </ui-select-match>
+								    <ui-select-choices repeat="service in (services | filter: $select.search) track by service.id">
+								        <span ng-bind="service.name"></span>
+								    </ui-select-choices>
+								</ui-select>
+		                    </td>
+		                    <td><input type="number" min="0" ng-model="item.units"></td>
+		                    <td>
+		                    	<div ng-click="item.unitPrice_edited = true" ng-hide="item.unitPrice_edited" >{{item.unit_price}}</div>
+		                    	<input type="number" ng-show="item.unitPrice_edited" ng-model="item.unit_price">
+		                    </td>
+		                    <td>{{item.unit_price * item.units || 0}}</td>
+		                    <td>
+		                    	<a ng-hide="sale.items.length == 0" title="eliminar" class="btn btn-link btn-sm" ng-click="removeItem($index)"><i class="fa fa-trash-o"></i></a>
+		                    </td>
+		                </tr>
+		                <tr>
+			                <td>
+		                    	<select ng-blur="addItem(item)"  focus-me="focusItem" ng-model="item.type" ng-options="saleType.name for saleType in itemTypes track by saleType.id" name="saleType" class="select2"></select>
+			                </td>
+		                    <td>
+		                    	<ui-select ng-blur="addItem(item)" ng-model="item.product" ng-show="item.type.id == itemTypeProduct">
+								    <ui-select-match allow-clear=true>
+								        <span ng-bind="$select.selected.name"></span>
+								    </ui-select-match>
+								    <ui-select-choices repeat="product in (products | filter: $select.search) track by product.id">
+								        <span ng-bind="product.name"></span>
+								    </ui-select-choices>
+								</ui-select>
+								<ui-select ng-blur="addItem(item)" ng-model="item.service" ng-show="item.type.id == itemTypeService">
+								    <ui-select-match allow-clear=true>
+								        <span ng-bind="$select.selected.name"></span>
+								    </ui-select-match>
+								    <ui-select-choices repeat="service in (services | filter: $select.search) track by service.id">
+								        <span ng-bind="service.name"></span>
+								    </ui-select-choices>
+								</ui-select>
+		                    </td>
+		                    <td><input ng-blur="addItem(item)" type="number" min="0" ng-model="item.units"></td>
+		                    <td>
+		                    
+		                    <div ng-click="item.unitPrice_edited = true"  ng-hide="item.unitPrice_edited" >{{item.unit_price}}</div>
+		                    	<input  type="number" ng-show="item.unitPrice_edited" ng-model="item.unit_price">
+		                    </td>
+		                    <td>{{item.unit_price * item.units || 0}}</td>
+		                    <td>
+		                    	<button class="btn btn-link btn-sm" ><i class="fa fa-check"></i></button>
+		                    </td>
+		                </tr>
+		                
+		                <tr>
+		                    <td></td>
+		                    <td>Descuento</td>
+		                    <td>
+		                    	<select ng-model="sale.discount_type" class="select2">
+		                    		<option value="{{discountTypeProcentaje}}">Porcentaje</option>
+		                    		<option value="{{discountTypeNumber}}">Número</option>
+		                    	</select>
+		                    </td>
+		                    <td>
+		                    	<input  type="number" min="0" ng-model="sale.discount">
+		                    </td>
+		                    <td>
+		                    	-${{sale.total_discount | number : 2}}
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td>Total sin IVA</td>
+		                    <td>
+		                    	${{sale.total | number : 2}}
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td>IVA 21%</td>
+		                    <td>
+		                    	${{sale.tax | number : 2}}
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <td></td>
+		                    <td></td>
+		                    <td></td>
+		                    <td>Total IVA incluido</td>
+		                    <td>
+		                    	${{sale.total_with_tax | number : 2}}
+		                    </td>
+
+		                </tr>
+		            </tbody>
+		        </table>
+			</div>
+		</div>
+		<div class="row" ng-show="sale.account">
+			<h4 class="col-sm-12">Condiciones de Pago</h4>
+			<div class="col-sm-6">
+	            <span class="checkbox" ng-repeat="paymentMethod in paymentsMethods" style="display: inline-block;">
+	        		<label class="required">
+	        			<input type="radio" ng-model="sale.paymentmethod" value="{{paymentMethod.id}}"> {{paymentMethod.name}}
+	        		</label>
+	            </span>
+			</div>
+			<div class="col-sm-6">
+				<textarea placeholder="Observaciones de Pago" ng-model="sale.payment_observations" class="col-xs-12"></textarea>
+			</div>
+			
+		</div>
+		<div class="row" style="margin-bottom: 20px;">
+			<div class="col-xs-12">
+				<h4>Observaciones</h4>
+				<textarea ng-model="sale.observations" class="col-xs-12"></textarea>
+			</div>
+		</div>
+		<p ng-show="editable">
+			<button class="btn-default btn" ng-disabled="saving" ng-click="save(sale)" type="submit">Guardar
+			</button>
+			<button class="btn-default btn" ng-disabled="saving" ng-click="saveAndAdd(sale)" type="submit">Guardar y crear nuevo
+			</button>
+		</p>
+	</div>
+</div>
+
+
+<script type="text/ng-template" id="createContact.html">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            {{ 'Creación de contacto'}}
+        </h3>
+    </div>
+    <div class="modal-body">
+    	<form class="form-horizontal" ng-submit="createContact(contactForm.$valid)" name="contactForm" novalidate>
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="lastname">Apellido</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': contactForm.lastname.$invalid && (contactForm.lastname.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newContact.lastname"
+                               name="lastname" required>
+                        <span ng-show="(contactForm.lastname.$dirty || submitted) && contactForm.lastname.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="firstname">Nombre</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': contactForm.firstname.$invalid && (contactForm.firstname.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newContact.firstname"
+                               name="firstname" required>
+                        <span ng-show="(contactForm.firstname.$dirty || submitted) && contactForm.firstname.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="email">Email</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': contactForm.email.$invalid && (contactForm.email.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newContact.email"
+                               name="email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="phone">Teléfono</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': contactForm.phone.$invalid && (contactForm.phone.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newContact.phone"
+                               name="phone">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="observations">Observaciones</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': contactForm.observations.$invalid && (contactForm.observations.$dirty || submitted) }">
+                        <textarea type="text" class="form-control"
+                               ng-model="newContact.observations"
+                               name="observations">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="Guardar"/>
+                <input class="btn btn-primary" type="button" ng-click="$close()"
+                       value="Cerrar"/>
+            </div>
+    	</form>
+    </div>
+</script>
+
+<script type="text/ng-template" id="createSubsidiary.html">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            {{ 'Creación de sucursal'}}
+        </h3>
+    </div>
+    <div class="modal-body">
+    	<form class="form-horizontal" ng-submit="createSubsidiary(subsidiaryForm.$valid)" name="subsidiaryForm" novalidate>
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="name">Nombre</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': subsidiaryForm.name.$invalid && (subsidiaryForm.name.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newSubsidiary.name"
+                               name="name" required>
+                        <span ng-show="(subsidiaryForm.name.$dirty || submitted) && subsidiaryForm.name.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="street">Calle</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': subsidiaryForm.street.$invalid && (subsidiaryForm.street.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newSubsidiary.street"
+                               name="street" required>
+                        <span ng-show="(subsidiaryForm.street.$dirty || submitted) && subsidiaryForm.street.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="street_number">Numero de Calle</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': subsidiaryForm.street_number.$invalid && (subsidiaryForm.street_number.$dirty || submitted) }">
+                        <input type="number" class="form-control"
+                               ng-model="newSubsidiary.street_number"
+                               name="street_number" required>
+                        <span ng-show="(subsidiaryForm.street_number.$dirty || submitted) && subsidiaryForm.street_number.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="department">Depto.</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': subsidiaryForm.department.$invalid && (subsidiaryForm.department.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newSubsidiary.department"
+                               name="department" required>
+                        <span ng-show="(subsidiaryForm.department.$dirty || submitted) && subsidiaryForm.department.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="zip_code">Código Postal</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': subsidiaryForm.zip_code.$invalid && (subsidiaryForm.zip_code.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newSubsidiary.zip_code"
+                               name="zip_code" required>
+                        <span ng-show="(subsidiaryForm.zip_code.$dirty || submitted) && subsidiaryForm.zip_code.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="locality">Localidad</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': subsidiaryForm.locality.$invalid && (subsidiaryForm.locality.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newSubsidiary.locality"
+                               name="locality" required>
+                        <span ng-show="(subsidiaryForm.locality.$dirty || submitted) && subsidiaryForm.locality.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="city">Ciudad</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': subsidiaryForm.city.$invalid && (subsidiaryForm.city.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newSubsidiary.city"
+                               name="city" required>
+                        <span ng-show="(subsidiaryForm.city.$dirty || submitted) && subsidiaryForm.city.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="Guardar"/>
+                <input class="btn btn-primary" type="button" ng-click="$close()"
+                       value="Cerrar"/>
+            </div>
+    	</form>
+    </div>
+</script>
+<script type="text/ng-template" id="createAccount.html">
+    <div class="modal-header">
+        <h3 class="modal-title">
+            {{ 'Creación de cuenta'}}
+        </h3>
+    </div>
+    <div class="modal-body">
+    	<form class="form-horizontal" ng-submit="createAccount(accountForm.$valid)" name="accountForm" novalidate>
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="name">Nombre</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': accountForm.name.$invalid && (accountForm.name.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newAccount.name"
+                               name="name" required>
+                        <span ng-show="(accountForm.name.$dirty || submitted) && accountForm.name.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="businessName">Razón Social</label>
+                    <div class="col-md-6"
+                         ng-class="{'has-error': accountForm.businessName.$invalid && (accountForm.businessName.$dirty || submitted) }">
+                        <input type="text" class="form-control"
+                               ng-model="newAccount.businessName"
+                               name="businessName" required>
+                        <span ng-show="(accountForm.businessName.$dirty || submitted) && accountForm.businessName.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="cuit">CUIT</label> <div class="col-md-6"
+                         ng-class="{'has-error': cuitError || (accountForm.cuit.$invalid && (accountForm.cuit.$dirty || submitted)) }">
+                        <input type="text" class="form-control"
+                               ng-model="newAccount.cuit"
+                               name="cuit">
+                        <span class="help-block" ng-show="cuitError">{{cuitError}}</span>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{'has-error': accountForm.activity.$invalid && (accountForm.activity.$dirty || submitted) }">
+                    <label class="col-md-3 control-label" for="lastname">Actividad</label>
+                    <div class="col-md-6">
+                        <select ng-model="newAccount.activity" ng-options="activity.name for activity in activities track by activity.id" name="activity" class="form-control" required></select>
+                        <span ng-show="(accountForm.activity.$dirty || submitted) && accountForm.activity.$error.required" class="help-block">requerido</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-primary" type="submit" value="Guardar"/>
+                <input class="btn btn-primary" type="button" ng-click="$close()"
+                       value="Cerrar"/>
+            </div>
+    	</form>
+    </div>
+</script>

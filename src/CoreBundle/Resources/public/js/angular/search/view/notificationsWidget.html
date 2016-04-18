@@ -1,0 +1,19 @@
+<!-- Menu toggle button -->
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"  ng-click="showNotifications()">
+    <i class='fa fa-bell-o'></i><span class='label label-danger' ng-show="alerts > 0">{{ alerts }}</span>
+</a>
+
+<ul class="dropdown-menu">
+    <li class="header">Tenes {{ notifications.length }} notificaciones.</li>
+    <li>
+        <ul class="menu">
+            <li ng-repeat="notification in notifications" ng-mouseover="setViewed(notification)">
+                <a href="{{ notification.url }}" ng-class="{'text-red': !notification.viewed }">
+                    <i class="fa text-aqua" ng-class="{'fa-users': (notification.type == 'user' || notification.type == 'contact_list'), 'fa-thumb-tack': notification.type == 'task', 'fa-calendar': notification.type == 'event', 'fa-envelope': notification.type == 'campaign_email'}"></i> 
+                    {{ notification.message }}
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="footer"><a href="/profile/notifications">Ver todas</a></li>
+</ul>

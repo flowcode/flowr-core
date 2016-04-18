@@ -1,0 +1,36 @@
+{% extends "FlowerCoreBundle::layout.html.twig" %}
+
+{% block title %}{{ 'Admin Settings'|trans|capitalize }} - {{ parent() }}{% endblock %}
+
+{% block app_menu %}
+    {{ include("FlowerCoreBundle:Default:admin_nav.html.twig") }}
+{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <h1>
+            {{ 'Settings' | trans }}
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box box-solid">
+            <div class="callout callout-warning col-sm-6">
+                <h4>{{ 'be careful'|trans|title }}</h4>
+                <p>{{ 'settings-warning'|trans }}</p>
+                <p>{{ 'ask-for-support'|trans }}</p>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

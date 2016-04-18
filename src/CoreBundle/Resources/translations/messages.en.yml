@@ -1,0 +1,52 @@
+
+
+#overall
+save: save
+edit: edit
+import: import
+imports: imports
+overview: overview
+
+#projects
+project: project
+projects: projects
+overview: overview
+
+status_backlog: backlog
+status_in_progress: in progress
+status_testing: testing
+status_finished: finished
+
+
+#contacts
+contacts: contacts
+
+#contact lists
+lists: lists
+ContactList: Contact List
+contactlist: contact list
+contactlists: contact lists
+new contactlist: new contact list
+
+#users
+profile: profile
+mail templates: mail templates
+contact lists: contact lists
+mail campaigns: mail campaigns
+
+
+smallDate: 'm/d/y'
+fullDateTime: m/d/y H:i
+fullTime: H:i
+
+
+Filter: Filter
+Settings: Configuración
+apply: aplicar
+board: tablero
+clean: limpiar
+
+resetting_password_ignere: Si este pedido no es valido ignore este mensaje
+
+settings-warning: Every action has an immediate effect on the system behavior.
+ask-for-support: If you have questions, please consult the support service.

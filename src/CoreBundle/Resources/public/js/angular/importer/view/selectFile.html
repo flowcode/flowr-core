@@ -1,0 +1,80 @@
+<wizard on-finish="finishImport()">
+    <wz-step title="Select file">
+        <div class="import-step col-sm-8 col-sm-offset-2">
+            <h2>Subir archivo de importación</h2>
+            <p>Recuerda que tiene que ser un archivo csv.</p>
+            <div>
+                <div class="col-sm-12" ng-show="loading">
+                    loading...
+                </div>
+                <div>Precionando el siguietne boton selecciona el archivo que deseas importar</div>
+                <div class="text-center" style="margin-top: 30px;">
+                    <button type="file" ngf-select="uploadFiles($file)" accept="text/csv" ngf-max-size="3MB" class="btn btn-success">
+                        <i class="fa fa-upload"></i> Subir archivo
+                    </button>
+                </div>
+                <br><br>
+                File:
+                <div style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}
+                    <div class="progress progress-sm active" ng-show="f.progress >= 0">
+                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="20"  ng-bind="f.progress + '%'" aria-valuemin="0" aria-valuemax="100" style="width: {{f.progress}}%">
+                        <span class="sr-only">{{f.progress}}% Completado</span>
+                        </div>
+                    </div>
+                </div>
+                {{errorMsg}}
+            </div>
+
+            <input type="submit" wz-next value="Continue" ng-show="doneUploading" class="btn btn-default" />
+        </div>
+    </wz-step>
+    <wz-step title="Select columns">
+        <div class="import-step col-sm-8 col-sm-offset-2">
+            <h2>Selecciona las columnas que corresponden a tu csv.</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Columna entidad</th>
+                        <th>Columna archivo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key, value) in colDef">
+                        <td class="text-right">
+                            {{key}}
+                        </td>
+                        <td>
+                            <select ng-model="colDef[key]" class="form-control">
+                                <option ng-repeat="colF in colsFile">{{colF}}</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <p>¿Estos contactos pertenecen a una cuenta?</p>
+                <select ng-model="colDef.accountId" class="form-control" ng-options="account.id as account.name for account in availableAccounts"></select>
+            </div>
+
+            <input type="submit" wz-next value="Continuar" class="btn btn-default" style="margin-bottom: 20px;"/>
+        </div>
+
+    </wz-step>
+    <wz-step title="Confirm">
+        <div class="import-step col-sm-8 col-sm-offset-2">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <h2>Confirmar importación</h2>
+                    <ul>
+                        <li ng-repeat="(key, value) in colDef">
+                            {{ key}} <i class="fa fa-arrow-right"></i> {{value}}
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <input type="submit" wz-next value="Importar" class="btn btn-success btn-lg" />
+        </div>
+    </wz-step>
+</wizard>

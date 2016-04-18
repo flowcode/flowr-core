@@ -1,0 +1,129 @@
+<div class="btn-group">
+    <button class="btn btn-default" ng-click="changeView('agendaDay', 'myCalendar2')">Agenda diaria</button>
+    <button class="btn btn-default" ng-click="changeView('agendaWeek', 'myCalendar2')">Agenda de semana</button>
+    <button class="btn btn-default" ng-click="changeView('month', 'myCalendar2')">Mes</button>
+</div>
+
+<div ui-calendar="uiConfig.calendar" calendar="myCalendar2" class="calendar" ng-model="eventSources"></div>
+
+
+<script type="text/ng-template" id="showEvent.html">
+    <form ng-submit="saveOrUpdate()">
+        <div class="modal-header">
+            <h3 class="modal-title" ng-hide="titleEditing" ng-click="titleEditing=true">
+                {{eventEditing.title}}
+            </h3>
+            <input type="text"
+                   ng-show="titleEditing"
+                   focus-me="titleEditing"
+                   id="inputname"
+                   ng-blur="titleEditing=false"
+                   class="form-control h1-editable"
+                   required
+                   ng-model="eventEditing.title"
+                   placeholder="Titulo">
+        </div>
+        <div class="modal-body">
+            <div class="">
+                <table class="table table-condensed">
+                    <tr>
+                        <td>Dirección</td>
+                        <td>
+                            <span ng-hide="addressEditing" ng-click="addressEditing=true">
+                                {{eventEditing.address}}
+                            </span>
+                            <input type="text"
+                                   ng-show="addressEditing"
+                                   focus-me="addressEditing"
+                                   id="address"
+                                   ng-blur="addressEditing=false"
+                                   class="form-control"
+                                   required
+                                   ng-model="eventEditing.address"
+                                   placeholder="Dirección">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Inicio</td>
+                        <td>
+                            <span ng-hide="startDateEditing" ng-click="startDateEditing=true">
+                                {{eventEditing.start_date}}
+                            </span>
+
+                            <input type="text" ng-show="startDateEditing" ng-blur="startDateEditing=false"
+                                   focus-me="startDateEditing" class="form-control" required
+                                   ng-model="eventEditing.start_date"
+                                   ng-required="true"
+                            />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Fin</td>
+                        <td>
+                            <span ng-hide="endDateEditing" ng-click="endDateEditing=true">
+                                {{eventEditing.end_date}}
+                            </span>
+
+                            <input type="text" ng-show="endDateEditing" ng-blur="endDateEditing=false"
+                                   focus-me="endDateEditing" class="form-control"
+                                   ng-model="eventEditing.end_date"
+                                   ng-required="true"
+                            />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Descripcion</td>
+                        <td>{{eventEditing.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Usuarios</td>
+                        <td>
+                            <select ng-model="eventEditing.users" multiple>
+                                <option ng-repeat="user in users" value="{{ user.id }}">
+                                    {{ user.firstname + ' ' + user.lastname }}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Cuenta</td>
+                        <td>
+                            <select ng-model="eventEditing.account_id">
+                                <option ng-repeat="account in accounts" value="{{ account.id }}">
+                                    {{ account.name }}
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Recordatorios
+                        </td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li ng-repeat="reminder in eventEditing.reminders">
+                                    <select ng-model="reminder.type">
+                                        <option value="1">Email</option>
+                                        <option value="2">Notification</option>
+                                        <option value="3">SMS</option>
+                                    </select>
+                                    <select ng-model="reminder.unity">
+                                        <option value="1">Minutos</option>
+                                        <option value="2">Horas</option>
+                                        <option value="3">Días</option>
+                                        <option value="4">Semanas</option>
+                                    </select>
+                                    <input type="number" ng-model="reminder.amount">
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+    </form>
+</script>

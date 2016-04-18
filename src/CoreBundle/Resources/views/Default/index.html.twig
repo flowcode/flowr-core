@@ -1,0 +1,126 @@
+{% extends "FlowerCoreBundle::layout.html.twig" %}
+{% block title %}{{ 'dashboard'|trans|capitalize }} - {{ parent() }}{% endblock %}
+{% block body %}
+    <section class="content-header">
+        <h1>
+            {{ 'Dashboard' | trans }}
+            <small>Hi!</small>
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-sm-6">
+                {% if is_granted('ROLE_PLANNER') %}
+                    <div class="box box-solid">
+                        <div class="box-header">
+                            <i class="ion ion-calendar"></i>
+                            <h3 class="box-title" id="one">{{ 'Mettings' | trans | capitalize }}</h3>
+                            <div class="box-tools pull-right">
+                            </div>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            {% if (eventstomorrow | length == 0 ) and ( eventstoday | length == 0) %}
+                                <div class="text-center">{{ 'NO EVENTS' | trans }} </div>
+                                <div class="text-center" style="font-size: 30px;">
+                                    <i class="ionicons ion-happy"></i>
+                                </div>
+                            {% endif %}
+                            {% if eventstoday | length > 0 %}
+                                <h4>{{ 'Today' | trans | capitalize }}</h4>
+                                {% for event in eventstoday %}
+                                    <div class="row">
+                                        <div class="col-sm-2 text-center">
+                                            <div style="font-size: 15px;"
+                                                 title="{{ event.startDate | date('fullDateTime' | trans) }}">{{ event.startDate | date('fullTime' | trans) }}</div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            {{ event.title }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% if eventstomorrow | length > 0 %}
+                                <h4>{{ 'Tomorrow' | trans | capitalize }}</h4>
+                                {% for event in eventstomorrow %}
+                                    <div class="row">
+                                        <div class="col-sm-2 text-center">
+                                            <div style="font-size: 15px;"
+                                                 title="{{ event.startDate | date('fullDateTime' | trans) }}">{{ event.startDate | date('fullTime' | trans) }}</div>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            {{ event.title }}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div><!-- /.box-body -->
+                        <div class="box-footer">
+
+                        </div>
+                    </div><!-- /.box -->
+                {% endif %}
+
+                <!-- My projects -->
+                {% if is_granted('ROLE_PROJECT') %}
+                    {{ render(controller('FlowerProjectBundle:Widget:myProjects')) }}
+                {% endif %}
+
+                {% if is_granted('ROLE_TASK') %}
+                    <div class="box box-solid">
+                        <div class="box-header">
+                            <i class="ion ion-clipboard"></i>
+                            <h3 class="box-title">{{ 'tasks'|trans|capitalize }}</h3>
+                            <div class="box-tools pull-right">
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            {{ include('FlowerBoardBundle:Task:taskList.html.twig', { 'tasks': myTasks }) }}
+                        </div>
+                        <div class="box-footer">
+
+                        </div>
+                    </div><!-- /.box -->
+                {% endif %}
+            </div>
+            <div class="col-sm-6">
+                <div class="box box-solid">
+                    <div class="box-header">
+                        <h3 class="box-title">{{ 'activity'|trans|title }}</h3>
+                    </div>
+                    <div class="box-body">
+                        {{ include('FlowerUserBundle:Profile:activity_feed.html.twig', {'feed':feed}) }}
+                    </div>
+                    <div class="box-footer">
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+    <ol id="tour" style="display: none;">
+        <li data-target="#toggle-launcher" data-angle="175">
+            This is the app launcher!
+        </li>
+        <li data-target="#bigSearchIcon" data-options="distance:10">
+            Here you can find everything.
+        </li>
+    </ol>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            'use strict';
+            $("#calendar").datepicker();
+
+        });
+    </script>
+{% endblock %}

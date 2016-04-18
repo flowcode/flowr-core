@@ -1,0 +1,29 @@
+
+.admin_tools form{
+    display: inline-block;
+}
+.admin_container p{
+    font-size: 18px;
+}
+.admin_tools{
+    margin: 25px 0px;
+    text-align: right;
+}
+.backdashOption {
+margin-bottom: 5px;
+}
+
+.dashInfoItem{
+    text-align: center;
+    
+}
+.dashInfo{
+    margin-bottom: 20px;
+}
+.dashBoardfilters{
+    display: none;
+    text-align: right;
+}
+.dashInfoNumber{
+    font-size: 30px;
+}
