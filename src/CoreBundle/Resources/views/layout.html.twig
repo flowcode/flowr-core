@@ -42,6 +42,13 @@
                         <!-- Navbar Right Menu -->
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
+                                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                                    <li>
+                                        <a href="{{ path('dashboard', {'_switch_user': '_exit'}) }}" class="btn btn-warning btn-xs">
+                                            {{ 'exit_impersonation'|trans }}
+                                        </a>
+                                    </li>
+                                {% endif %}
 
                                 <li class="dropdown notifications-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -89,16 +96,8 @@
                                             </p>
                                         </li>
                                         <!-- Menu Body -->
-                                        <li class="user-body" style="display: none;">
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Followers</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Sales</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Friends</a>
-                                            </div>
+                                        <li class="user-body">
+
                                         </li>
                                         <!-- Menu Footer-->
                                         <li class="user-footer">

@@ -157,3 +157,6 @@ clicks: clicks
 state: estado
 campaign dashboard: tablero de campaña
 Calendar: Calendario
+
+enter_impersonation: Entrar como
+exit_impersonation: Volver a mi usuario
