@@ -59,7 +59,7 @@
 
               {% if is_granted('ROLE_FINANCE') %}
                 <div class="col-md-3 col-sm-4 col-xs-6 app-launcher-container">
-                    <a href="#">
+                    <a href="{{ path('finance_dashboard') }}">
                         <div class="app-launcher">
                             <img src="{{ asset('bundles/flowercore/images/icons/Bank-100.png') }}" class="img-responsive">
                             <div class="app-launcher-title">

@@ -5,7 +5,7 @@
 }
 
 a, .btn-link {
-    color: #181B3D;
+    color: #C6478B;
 }
 
 .btn-link:hover,
@@ -149,7 +149,7 @@ a:hover, a:active, a:focus {
 }
 
 .redColor {
-    color: #181B3D;
+    color: #C6478B;
 }
 
 .btn.btn-circle {
@@ -377,7 +377,7 @@ tr.card {
 
 .btn-primary {
     border-color: #0099FF;
-    background-color: #181B3D;
+    background-color: #C6478B;
     border-radius: 3px;
 }
 
@@ -643,7 +643,7 @@ form .progress {
 }
 
 .nav-tabs-custom > .nav-tabs > li.active {
-    border-top-color: #181B3D;
+    border-top-color: #C6478B;
 }
 
 .sidebar-menu > li > a {
