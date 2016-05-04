@@ -5,14 +5,15 @@
 }
 
 a, .btn-link {
-    color: #C6478B;
+    color: #181B3D;
 }
 
 .btn-link:hover,
 .btn-link:active,
 .btn-link:focus,
 a:hover, a:active, a:focus {
-    color: #0099FF;
+    color: #000;
+    text-decoration: underline;
 }
 
 .skin-black-light .main-header .navbar-brand,
@@ -149,7 +150,7 @@ a:hover, a:active, a:focus {
 }
 
 .redColor {
-    color: #C6478B;
+    color: #181B3D;
 }
 
 .btn.btn-circle {
@@ -377,7 +378,7 @@ tr.card {
 
 .btn-primary {
     border-color: #0099FF;
-    background-color: #C6478B;
+    background-color: #181B3D;
     border-radius: 3px;
 }
 
@@ -643,7 +644,7 @@ form .progress {
 }
 
 .nav-tabs-custom > .nav-tabs > li.active {
-    border-top-color: #C6478B;
+    border-top-color: #181B3D;
 }
 
 .sidebar-menu > li > a {
