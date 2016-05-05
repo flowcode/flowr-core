@@ -57,7 +57,7 @@ angular.module('flowerSales').controller("SalesController", function ($scope, $r
 				(newValue !== undefined && (
 				(newValue.id !== undefined && oldValue.id === undefined) ||
 				(newValue.id != oldValue.id))) ){
-				$scope.item.unit_price = $scope.item.product.price;
+				$scope.item.unit_price = $scope.item.product.sale_price;
 				$scope.item.service = undefined;
 			}
 		},true);
@@ -76,7 +76,7 @@ angular.module('flowerSales').controller("SalesController", function ($scope, $r
 				(newValue.id !== undefined && oldValue.id === undefined) ||
 				(newValue.id != oldValue.id))) ){
 				if($scope.item.type == $scope.itemTypeProduct){
-					$scope.item.unit_price = $scope.item.product.price;
+					$scope.item.unit_price = $scope.item.product.sale_price;
 					$scope.item.service = undefined;
 				}else{
 					$scope.item.unit_price = $scope.item.service.price;
