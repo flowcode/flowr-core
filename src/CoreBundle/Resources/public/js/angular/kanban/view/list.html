@@ -39,6 +39,10 @@
         loading...
     </div>
     <div class="col-sm-12">
+        <a href="" ng-click="selectAll()">
+        <span data-ng-if="selectAllStatus">seleccionar todo</span>
+        <span data-ng-if="!selectAllStatus">deseleccionar todo</span>
+        </a>
         <table class="table table-condensed table-striped">
             <thead>
             <tr>

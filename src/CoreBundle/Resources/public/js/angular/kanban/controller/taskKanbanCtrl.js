@@ -207,7 +207,17 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
             $scope.revertEditing(statusIndex, listIndex);
         }
     };
-
+    $scope.selectAllStatus = {}
+    $scope.selectAllStatus.TODO = true;
+    $scope.selectAllStatus.DOING = true;
+    $scope.selectAllStatus.DONE = true;
+    $scope.selectAllColumn = function(toogleKey, tasks) {
+        angular.forEach(tasks, function(task) {
+          task.selected = $scope.selectAllStatus[toogleKey];
+        });
+        $scope.multiselect = $scope.selectAllStatus.TODO|| $scope.selectAllStatus.DOING|| $scope.selectAllStatus.DONE;
+        $scope.selectAllStatus[toogleKey]  = !$scope.selectAllStatus[toogleKey];
+    }
 
     $scope.revertEditing = function (statusIndex, listIndex) {
         $scope.tasks[statusIndex].tasks[listIndex] = $scope.originalTodo;

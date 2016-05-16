@@ -177,6 +177,15 @@ angular.module('flowerKanban').controller("TaskListController", function ($scope
             });
     };
 
+    $scope.selectAllStatus = true;
+    $scope.selectAll = function() {
+        angular.forEach($scope.tasks, function(task) {
+          task.selected = $scope.selectAllStatus;
+        });
+        $scope.multiselect = $scope.selectAllStatus;
+        $scope.selectAllStatus  = !$scope.selectAllStatus;
+    }
+
     $scope.doubleClick = function (task) {
         $timeout(function () {
             $scope.editTodo(task);

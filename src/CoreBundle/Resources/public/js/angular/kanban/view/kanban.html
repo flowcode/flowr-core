@@ -43,9 +43,15 @@
         <div class="row">
             <div class="col-xs-4">
                 <h4>
-                    <div ng-show="status.entity.name == 'todo'">Pendientes</div>
-                    <div ng-show="status.entity.name == 'doing'">Realizando</div>
-                    <div ng-show="status.entity.name == 'done'">Finalizadas</div>
+                    <div ng-show="status.entity.name == 'todo'">
+                        Pendientes
+                    </div>
+                    <div ng-show="status.entity.name == 'doing'">
+                        Realizando
+                    </div>
+                    <div ng-show="status.entity.name == 'done'">
+                        Finalizadas
+                    </div>
                 </h4>
             </div>
             <div class="col-xs-8">
@@ -55,6 +61,26 @@
                 <i class="fa fa-filter" ng-click="toggleFilter('filter_'+status.entity.id)"
                    style="float: right;font-size: 15px;margin: 7px;cursor: pointer;"></i>
 
+            </div>
+            <div class="col-xs-12">
+                <div ng-show="status.entity.name == 'todo'">
+                    <a href="" ng-click="selectAllColumn('TODO',status.tasks)">
+                        <small data-ng-if="selectAllStatus.TODO">seleccionar todo</small>
+                        <small data-ng-if="!selectAllStatus.TODO">deseleccionar todo</small>
+                    </a>
+                </div>
+                <div ng-show="status.entity.name == 'doing'">
+                    <a href="" ng-click="selectAllColumn('DOING',status.tasks)">
+                        <small data-ng-if="selectAllStatus.DOING">seleccionar todo</small>
+                        <small data-ng-if="!selectAllStatus.DOING">deseleccionar todo</small>
+                    </a>
+                </div>
+                <div ng-show="status.entity.name == 'done'">
+                    <a href="" ng-click="selectAllColumn('DONE',status.tasks)">
+                        <small data-ng-if="selectAllStatus.DONE">seleccionar todo</small>
+                        <small data-ng-if="!selectAllStatus.DONE">deseleccionar todo</small>
+                    </a>
+                </div>
             </div>
         </div>
 
