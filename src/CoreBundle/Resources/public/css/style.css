@@ -726,3 +726,6 @@ form .progress {
     height: 200px;
     overflow-y: scroll;
 }
+.archived a {
+    color: lightblue;
+}
