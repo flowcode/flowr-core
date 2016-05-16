@@ -52,7 +52,9 @@
             <tbody>
             <tr ng-repeat="task in tasks" class="card" ng-class="{selected: task.selected}"
                 ng-click="singleClick(task, $event)">
-                <td>{{ task.id}}</td>
+                <td>
+                    <a href="/task/{{task.id}}/show">#{{ task.id}}</a>
+                </td>
                 <td>
                     {{ task.name }}
                 </td>
