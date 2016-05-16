@@ -6,7 +6,7 @@ socket.on('connect', function () {
     socket.emit('adduser', username, '#general');
 });
 
-$('form').submit(function () {
+$('#chat form').submit(function () {
     socket.emit('sendchat', {'user': username, 'msg': $('#m').val()});
     $('#m').val('');
     return false;
