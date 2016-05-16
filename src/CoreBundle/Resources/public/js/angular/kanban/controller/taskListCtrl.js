@@ -1,5 +1,4 @@
 angular.module('flowerKanban').controller("TaskListController", function ($scope, $routeParams, $timeout, $http, $modal, $interval, $pusher, $window) {
-
     $scope.loading = true;
     $scope.tasks = [];
     $scope.statuses = [];
@@ -88,6 +87,12 @@ angular.module('flowerKanban').controller("TaskListController", function ($scope
                 $scope.tasks = response.data;
                 $scope.loading = false;
             });
+        var promise = $http.get(rootPath + 'p/api/boards/taskstatus/getall');
+        promise.then(
+            function (response) {
+                $scope.allStatus = response.data;
+            });
+
     };
 
     $scope.findAvailableUsers = function () {
@@ -120,8 +125,7 @@ angular.module('flowerKanban').controller("TaskListController", function ($scope
     };
 
     $scope.singleClick = function (task, e) {
-
-        if (e.shiftKey) {
+        if (e.ctrlKey) {
             if (task.selected) {
                 task.selected = false;
             } else {
@@ -166,7 +170,7 @@ angular.module('flowerKanban').controller("TaskListController", function ($scope
                 $scope.origTaskEditExtended = angular.copy(response.data.task);
                 $('#textarea_html').wysihtml5();
                 modalInstance = $modal.open({
-                    templateUrl: 'viewExtended.html',
+                    templateUrl: rootPath+'bundles/flowercore/js/angular/kanban/view/modal/extendedView.html',
                     size: "lg",
                     scope: $scope
                 });

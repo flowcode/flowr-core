@@ -9,7 +9,7 @@
                 <li class="dropdown-submenu">
                     <a href="#">Cambiar estado a</a>
                     <ul class="dropdown-menu">
-                        <li ng-repeat="status in statuses">
+                        <li ng-repeat="status in allStatus">
                             <a ng-click="bulkStatusChange(status.id)">
                                 {{ status.name|capitalize }}
                             </a>
@@ -21,7 +21,9 @@
                     <ul class="dropdown-menu">
                         <li ng-repeat="user in availableUsers">
                             <a ng-click="bulkChangeAssignee(user.id)">
-                                {{ user.firstname|capitalize }}
+                                <span  data-ng-if="user.firstname" data-ng-attr-value="">{{user.firstname}}</span>
+                                <span  data-ng-if="(user.firstname && user.lastname)">{{user.lastname}}</span>
+                                <span  data-ng-if="!user.firstname" >{{user.username}}</span>
                             </a>
                         </li>
                     </ul>
@@ -69,152 +71,6 @@
         </table>
     </div>
 </div>
-
-<script type="text/ng-template" id="viewExtended.html">
-    <div>
-        <form ng-submit="doneEditingExtended()">
-            <div class="modal-header">
-                <div class="form-group">
-                    <h3 ng-hide="nameEditing" ng-click="nameEditing=true">
-                        #{{taskEditExtended.id}} {{taskEditExtended.name}}
-                    </h3>
-                    <input type="text" ng-show="nameEditing" focus-me="nameEditing" id="inputname"
-                           ng-blur="nameEditing=false" class="form-control h1-editable" required
-                           ng-model="taskEditExtended.name" placeholder="name">
-                </div>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                            <div ng-click="descriptionEditing=true"
-                                 ng-hide="descriptionEditing || (!taskEditExtended.description || taskEditExtended.description.length == 0)"
-                                 ng-bind-html="taskEditExtended.description | rawHtml">
-                            </div>
-                            <p ng-hide="descriptionEditing || (taskEditExtended.description && taskEditExtended.description.length > 0)"
-                               ng-click="descriptionEditing=true"> no descrption</p>
-
-                            <div ng-show="descriptionEditing">
-                                <textarea focus-me="descriptionEditing" ng-blur="descriptionEditing=false"
-                                          class="form-control"
-                                          rich-text-editor ng-model="taskEditExtended.description"></textarea>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <div class="col-sm-8">
-                                <h4>Actividad</h4>
-                                <div class="feed">
-                                    <div class="feed-entry" ng-repeat="entry in taskEditExtended.history_entries">
-                                        <div class="feed-user-img">
-                                            <img src="{{ entry.user.avatar }}" class="img-circle">
-                                        </div>
-                                        <div class="feed-content">
-                                            <div class="feed-user-info">
-                                                <a class="username" href="#">
-                                                    {{ entry.user.firstname + " " + entry.user.lastname }}
-                                                </a>
-                                                <span class="date">{{ entry.changed_on|date:'medium' }}</span>
-                                            </div>
-                                            <div>
-                                                Set {{ entry.attribute }} to {{ entry.value }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="row">
-                            <label class="col-xs-4">Creado:</label>
-                            <div class="col-xs-8">
-                                <div>
-                                    {{ taskEditExtended.created| date:'medium' }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-xs-4">Vencimiento:</label>
-                            <div class="col-xs-8">
-                                <div>
-                                    {{ taskEditExtended.due_date| date:'medium' }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-xs-4">Última actualización:</label>
-                            <div class="col-xs-8">
-                                <div>
-                                    {{ taskEditExtended.updated| date:'medium' }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-xs-4">Estado</label>
-                            <div class="col-xs-8">
-                                <div>
-                                    {{taskEditExtended.status.name}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-xs-4">Asignado</label>
-                            <div class="col-xs-8">
-                                <div class="text-center">
-                                    <img src="{{taskEditExtended.assignee.avatar}}" class="img-circle user-image">
-                                </div>
-                                <div class="text-center">
-                                    {{taskEditExtended.assignee.firstname + " " + taskEditExtended.assignee.lastname}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-xs-4">Estimado (Hs): </label>
-                            <div class="col-xs-8">
-                                <div ng-hide="estimatedEditing" ng-click="estimatedEditing=true">
-                                    {{taskEditExtended.estimated || "no estimation"}}
-                                </div>
-                                <input type="number" ng-show="estimatedEditing" focus-me="estimatedEditing"
-                                       id="inputestimated"
-                                       ng-blur="estimatedEditing=false" class="form-control "
-                                       ng-model="taskEditExtended.estimated" placeholder="estimation">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-xs-4">Insumido (Hs): </label>
-                            <div class="col-xs-8">
-                                <div>
-                                    {{taskEditExtended.spent}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <label class="col-xs-4">Archivos</label>
-                            <div class="col-xs-8">
-                                <div>
-                                    <ul class="list-unstyled">
-                                        <li ng-repeat="file in taskEditExtended.attachments">
-                                            <a href="{{ file.path }}">
-                                                <i class="fa fa-paperclip"></i> {{ file.name }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <a href='/task/{{taskEditExtended.id}}/show' class="btn btn-default">Full view</a>
-                <button type="submit" class="btn btn-primary">listo</button>
-            </div>
-        </form>
-    </div>
-</script>
 <script type="text/ng-template" id="logTime.html">
     <form ng-submit="doneLogTime()">
         <div class="modal-header">

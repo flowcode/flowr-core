@@ -1,5 +1,4 @@
 angular.module('flowerKanban').controller("TaskKanbanController", function ($scope, $routeParams, $timeout, $http, $modal, $interval, $pusher, $window) {
-
     $scope.loading = true;
     $scope.tasks = [];
     $scope.statuses = [];
@@ -82,12 +81,16 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
     };
 
     $scope.findAll = function () {
-        console.log('find all');
         var promise = $http.get(rootPath + 'p/api/kanban/tasks/kanban/filter/' + filterId);
         promise.then(
             function (response) {
                 $scope.tasks = response.data;
                 $scope.loading = false;
+            });
+        var promise = $http.get(rootPath + 'p/api/boards/taskstatus/getall');
+        promise.then(
+            function (response) {
+                $scope.allStatus = response.data;
             });
     };
 
@@ -121,8 +124,7 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
     };
 
     $scope.singleClick = function (task, e) {
-
-        if (e.shiftKey) {
+        if (e.ctrlKey) {
             if (task.selected) {
                 task.selected = false;
             } else {
@@ -165,10 +167,12 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
                 $scope.taskEditExtended.tasklogs = response.data.tasklogs;
                 $scope.taskEditExtended.history_entries = response.data.history_entries;
                 $scope.origTaskEditExtended = angular.copy(response.data.task);
+                $scope.modalInstance = modalInstance;
                 $('#textarea_html').wysihtml5();
                 modalInstance = $modal.open({
-                    templateUrl: 'viewExtended.html',
+                    templateUrl: rootPath+'bundles/flowercore/js/angular/kanban/view/modal/extendedView.html',
                     size: "lg",
+                    controller: 'fullEditTaks',
                     scope: $scope
                 });
             });
@@ -227,24 +231,9 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
         stopSync = false;
     };
 
-    $scope.doneEditingExtended = function () {
-        console.log('done editing');
-        $scope.taskEditExtended.filter_id = filterId;
-        $http.post(rootPath + 'p/api/kanban/updateTaskExtended/' + $scope.taskEditExtended.id, $scope.taskEditExtended).then(function (response) {
-            $scope.findAll();
-            $scope.taskEditExtended = null;
-            modalInstance.close();
-        }, function (response) {
-            $scope.taskEditExtended = null;
-            modalInstance.close();
-        });
-
-    };
-
     $scope.doneEditing = function (todo) {
         $scope.editedTodo = null;
         todo.title = todo.title.trim();
-
         if (!todo.title) {
             $scope.removeTodo(todo);
         }
@@ -274,7 +263,6 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
     /* realtime updates */
     pusher.subscribe('filter-' + filterId);
     pusher.bind('position-update', function (data) {
-        console.log('real time update');
         $scope.findAll();
     });
     $scope.findAvailableUsers();
@@ -309,7 +297,6 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
     }
 
     $scope.bulkStatusChange = function (statusId) {
-        console.log('bulk status change');
         var tasksToBeChanged = selectedTasks();
         if (tasksToBeChanged.length > 0) {
             $http.post(rootPath + 'task/' + statusId + '/bulk_status', {
@@ -323,7 +310,6 @@ angular.module('flowerKanban').controller("TaskKanbanController", function ($sco
     };
 
     $scope.bulkChangeAssignee = function (userId) {
-        console.log('bulk assignee change');
         var tasksToBeChanged = selectedTasks();
         if (tasksToBeChanged.length > 0) {
             $http.post(rootPath + 'task/' + userId + '/bulk_user', {
