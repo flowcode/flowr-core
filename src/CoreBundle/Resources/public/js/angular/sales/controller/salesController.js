@@ -1,4 +1,4 @@
-angular.module('flowerSales').controller("SalesController", function ($scope, $routeParams, $http, $modal, AccountService, ContactService,PaymentMethodService,SaleService,ProductService, SaleStatusService, toaster, $q, dialogs, $translate, ActivityService, ServiceService, SaleCategoryService,$timeout) {
+angular.module('flowerSales').controller("SalesController", function ($scope, $routeParams, $http, $modal, AccountService, ContactService,PaymentMethodService,SaleService,ProductService, SaleStatusService, toaster, $q, dialogs, $translate, ActivityService, ServiceService, SaleCategoryService,$timeout, SubsidiaryService) {
 	
 	$scope.paymentsMethods = [];
 	$scope.products = [];

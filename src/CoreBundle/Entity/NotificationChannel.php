@@ -3,12 +3,14 @@
 namespace Flower\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
+
 
 /**
  * NotificationChannel
  *
  * @ORM\Table(name="core_notification_channel")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="\Flower\CoreBundle\Repository\NotificationChannelRepository")
  */
 class NotificationChannel
 {
@@ -35,6 +37,10 @@ class NotificationChannel
      */
     private $type;
 
+    /**
+     * @OneToMany(targetEntity="\Flower\CoreBundle\Entity\NotificationChannelParameter", mappedBy="notificationChannel")
+     */
+    private $parameters;
 
     /**
      * Get id
@@ -91,4 +97,23 @@ class NotificationChannel
     {
         return $this->type;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @param mixed $parameters
+     */
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
+    }
+
+
+
 }
