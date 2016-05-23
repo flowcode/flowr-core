@@ -37,12 +37,14 @@ services:
         class: Flower\CoreBundle\Service\NotificationService
         calls:
           - [ setContainer,[ @service_container ]]
+
     flower.search:
         class: Flower\CoreBundle\Service\SearchService
         arguments: ['@security.context']
         calls:
           - [ setContainer,[ @service_container ] ]
-    flower.core.service.kanban.order: 
+
+    flower.core.service.kanban.order:
         class: Flower\CoreBundle\Service\KanbanOrderService
         calls:
           - [ setContainer,[ @service_container ]]
@@ -56,3 +58,10 @@ services:
             class: Flower\CoreBundle\Service\GoogleClientService
             calls:
               - [ setContainer,[ @service_container ]]
+
+
+    flower.core.service.notification_handler.email:
+            class: Flower\CoreBundle\Entity\Impl\EmailNotificationChannelHandler
+            calls:
+                - [setSender, ["@flowcode.sender.senderEmailMailgun"]]
+                - [setContainer, ["@service_container"]]

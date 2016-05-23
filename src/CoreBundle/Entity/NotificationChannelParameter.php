@@ -38,7 +38,7 @@ class NotificationChannelParameter
     private $value;
 
     /**
-     * @ManyToOne(targetEntity="\Flower\CoreBundle\Entity\NotificationChannel", inversedBy="parameters")
+     * @ManyToOne(targetEntity="\Flower\CoreBundle\Entity\NotificationChannelImpl", inversedBy="parameters")
      * @JoinColumn(name="notification_channel_id", referencedColumnName="id")
      */
     private $notificationChannel;

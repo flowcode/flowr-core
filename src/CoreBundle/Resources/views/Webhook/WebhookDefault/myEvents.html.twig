@@ -1,0 +1,5 @@
+<ul class="list-unstyled">
+    {% for event in events %}
+    <li>{{ event.startDate|date }} - {{ event.title }}</li>
+    {% endfor %}
+</ul>

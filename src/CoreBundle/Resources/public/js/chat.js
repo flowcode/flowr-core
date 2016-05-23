@@ -7,7 +7,7 @@ socket.on('connect', function () {
 });
 
 $('#chat form').submit(function () {
-    socket.emit('sendchat', {'user': username, 'msg': $('#m').val()});
+    socket.emit('sendchat', {'appkey': flowr_node_app_id, 'user': username, 'msg': $('#m').val()});
     $('#m').val('');
     return false;
 });
@@ -18,15 +18,41 @@ function appendMessage(data) {
     $('#messages').animate({scrollTop: $('#messages').height()});
 }
 
+function notifyChat() {
+    var chatView = $('#chat');
+    if (chatView.hasClass('collapsed')) {
+        chatView.addClass('notified');
+    } else {
+        chatView.removeClass('notified');
+    }
+}
+
 socket.on('updatechat', function (data) {
-    appendMessage(data)
+    appendMessage(data);
+    notifyChat();
+});
+
+socket.on('server-message', function (data) {
+    appendMessage(data);
 });
 
 socket.on('p-' + username, function (data) {
-    data.user = '<img src="'+ flowr_logo +'" width="15">';
-    appendMessage(data)
+    data.user = '<img src="' + flowr_logo + '" width="15">';
+    appendMessage(data);
+    notifyChat();
+});
+
+socket.on('flowr-' + username, function (data) {
+    data.user = '<img src="' + flowr_logo + '" width="15">';
+    appendMessage(data);
+    responsiveVoice.speak(data.msg, 'Spanish Latin American Female');
+    notifyChat();
 });
 
 $('#chat-toggle').click(function () {
-    $('#chat').toggleClass('collapsed');
+    var chatView = $('#chat');
+    chatView.toggleClass('collapsed');
+    if (!chatView.hasClass('collapsed')) {
+        chatView.removeClass('notified');
+    }
 });

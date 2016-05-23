@@ -1,0 +1,112 @@
+{% extends "FlowerCoreBundle::layout.html.twig" %}
+
+{% block title %}NotificationChannel - {{ parent() }}{% endblock %}
+
+{% block app_menu %}
+    {{ include("FlowerCoreBundle:Default:admin_nav.html.twig") }}
+{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <h1>{{ 'NotificationChannel' | trans({}, 'NotificationChannel') }}</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href={{ path('dashboard') }}>
+                    <i class="fa fa-dashboard"></i> {{ "Dashboard" | trans({}, 'NotificationChannel') }}
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('notification_channel') }}"> {{ '%entity% list'|trans({'%entity%': 'NotificationChannel'}, 'NotificationChannel') }}</a>
+            </li>
+            <li class="active">{{ '%entity%'|trans({'%entity%': 'NotificationChannel'}, 'NotificationChannel') }}</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title"></h3>
+                <div class="box-tools">
+                    {{ form_start(delete_form) }}
+                    {{ form_widget(delete_form) }}
+
+                    <div class="btn-group record_actions">
+
+                        <a class="btn btn-primary"
+                           href="{{ path('notification_channel_edit', {id: notificationChannel.id}) }}">
+                            <i class="fa fa-edit"></i> {{ 'Edit'|trans({}, 'NotificationChannel') }}
+                        </a>
+                        <button class="btn btn-danger" type="submit"><i
+                                    class="fa fa-trash-o"></i> {{ 'Delete'|trans({}, 'NotificationChannel') }}</button>
+
+                    </div>
+
+                    <input name="modal" type="hidden" value="0">
+                    {{ form_end(delete_form) }}
+
+                    <div id="delete_confirm" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">&times;</button>
+                                    <h3>{{ 'Confirm delete'|trans({}, 'NotificationChannel') }}</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{ 'You are about to delete an item'|trans({}, 'NotificationChannel') }}
+                                        , {{ 'this procedure is irreversible'|trans({}, 'NotificationChannel') }}.</p>
+                                    <p>{{ 'Do you want to proceed?'|trans({}, 'NotificationChannel') }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger">{{ 'Yes'|trans({}, 'NotificationChannel') }}</button>
+                                    <button class="btn btn-default"
+                                            data-dismiss="modal">{{ 'No'|trans({}, 'NotificationChannel') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-hover record_properties">
+                    <tbody>
+                    <tr>
+                        <th scope="row">{{ 'Id'|trans({}, 'NotificationChannel') }}</th>
+                        <td>{{ notificationChannel.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">{{ 'Name'|trans({}, 'NotificationChannel') }}</th>
+                        <td>{{ notificationChannel.name }}</td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="box-footer">
+
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Parametros</h3>
+            </div>
+            <div class="box-body">
+                <table class="table">
+                    {% for parameter in notificationChannel.parameters %}
+                        <tr>
+                            <th>{{ parameter.name }}</th>
+                            <td>{{ parameter.value }}</td>
+                            <td>
+                                <a href="#">editar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+{% endblock %}

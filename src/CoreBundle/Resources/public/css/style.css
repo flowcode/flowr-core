@@ -697,9 +697,9 @@ form .progress {
     width: 80%;
 }
 
+/* chat */
 .chat{
     height: 280px;
-    background-color: #ddd;
     position: fixed;
     bottom: 0px;
     width: 240px;
@@ -710,17 +710,23 @@ form .progress {
     height: 32px;
 }
 .chat-header{
+    cursor: pointer;
     display: table;
     height: 15px;
-    width: 100%;
+    width: 50px;
+    text-align: center;
     padding: 5px;
     background-color: lightgrey;
+}
+.chat.notified .chat-header {
+    background-color: greenyellow;
 }
 .chat-users{
 
 }
 .chat-messages{
     padding: 5px;
+    background-color: #ddd;
 }
 .chat #messages{
     height: 200px;

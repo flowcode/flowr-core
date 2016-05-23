@@ -140,10 +140,8 @@
             {% endblock %}
 
             <div class="chat collapsed" id="chat">
-                <div class="chat-header">
-                    <i class="fa fa-comment-o"></i>
-                    <small>Messages</small>
-                    <button class="btn btn-xs pull-right" id="chat-toggle"><i class="fa fa-minus"></i></button>
+                <div class="chat-header" id="chat-toggle">
+                        <i class="fa fa-comment-o"></i>
                 </div>
                 <div class="chat-users"></div>
                 <div class="chat-messages">
@@ -357,12 +355,13 @@
     </script>
 
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="http://code.responsivevoice.org/responsivevoice.js"></script>
     <script>
         var flowr_logo = '{{ asset('bundles/flowercore/images/flowr_icon_alpha.png') }}';
-        //var host = '127.0.0.1:9000'
-        var host = '74.207.253.57:9000'
+        var host = '{{ flowr_node_host }}';
         var username = '{{ app.user.username }}';
-        var socket = io.connect('http://'+host+'/flowcode');
+        var flowr_node_app_id = '{{ flowr_node_app_id }}';
+        var socket = io.connect('http://'+host+'/{{ flowr_node_app_id }}');
     </script>
     <script src="{{ asset('bundles/flowercore/js/chat.js') }}"></script>
 {% endblock %}
