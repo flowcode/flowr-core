@@ -1,4 +1,4 @@
-angular.module('flowerSales').controller("SalesController", function ($scope, $routeParams, $http, $modal, AccountService, ContactService,PaymentMethodService,SaleService,ProductService, SaleStatusService, toaster, $q, dialogs, $translate, ActivityService, ServiceService, SaleCategoryService,$timeout, SubsidiaryService) {
+angular.module('flowerSales').controller("SalesController", function ($scope, $routeParams, $http, $modal, AccountService, ContactService,PaymentMethodService,SaleService,ProductService, SaleStatusService, toaster, $q, dialogs, $translate, ActivityService, ServiceService, SaleCategoryService,$timeout, SubsidiaryService, FinanceAccountService) {
 	
 	$scope.paymentsMethods = [];
 	$scope.products = [];
@@ -23,6 +23,7 @@ angular.module('flowerSales').controller("SalesController", function ($scope, $r
 			SaleStatusService.findAll(),
 			ServiceService.findAll(),
 			SaleCategoryService.findAll(),
+			FinanceAccountService.findIncomes(),
 		]).then(function(data) {
 			$scope.products = data[0].data;
 			$scope.accounts = data[1].data;
@@ -30,6 +31,7 @@ angular.module('flowerSales').controller("SalesController", function ($scope, $r
 			$scope.saleStatus =  data[3].data;
 			$scope.services = data[4].data;
 			$scope.saleCategorys = data[5].data;
+			$scope.financeAccounts = data[6].data;
 			$scope.loaded = true;
 			if(!saleId){
 				restartSale();
